@@ -129,7 +129,7 @@ def main():
     logging.info("Loading training images...")
     logging.info("Loading validation images ...")
 
-    train_dataset = ImageNetDataset(txt_file = './data/meta/train.txt',
+    train_dataset = ImageNetDataset(txt_file = '/mnt/lustre/share/images/meta/train.txt',
                 root_dir = traindir,
                 transform = transforms.Compose([
                     transforms.Resize((256, 256)),
@@ -138,7 +138,7 @@ def main():
                     transforms.ToTensor(),
                     normalize,
                     ]))
-    val_dataset = ImageNetDataset(txt_file = './data/meta/val.txt',
+    val_dataset = ImageNetDataset(txt_file = '/mnt/lustre/share/images/meta/val.txt',
         root_dir = valdir,
         transform = transforms.Compose([
                 transforms.Resize((256, 256)),
