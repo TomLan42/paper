@@ -7,11 +7,8 @@ import logging
 import torch
 import torch.nn as nn
 import torch.nn.parallel
-import torch.backends.cudnn as cudnn
-import torch.distributed as dist
 import torch.optim
 import torch.utils.data
-import torch.utils.data.distributed
 import torchvision
 import torchvision.transforms as transforms
 import torchvision.datasets as datasets
@@ -76,17 +73,16 @@ def main():
     args = parser.parse_args()
 
     # create model
-    
+    print ('loading model') 
     model = ResNet18()
     input_size = 224
    
-    model.features = torch.nn.DataParallel(model.features)
+    model =  torch.nn.DataParallel(model)
     model.cuda()
 
-
+    print ('loading complete')
     # define loss function (criterion) and optimizer
     criterion = nn.CrossEntropyLoss().cuda()
-
     optimizer = torch.optim.Adam(model.parameters(), args.lr,
                                 weight_decay=args.l)
 
@@ -112,8 +108,6 @@ def main():
             del checkpoint
         else:
             print("=> no checkpoint found at '{}'".format(args.resume))
-
-    cudnn.benchmark = True
 
     # Data loading code
 

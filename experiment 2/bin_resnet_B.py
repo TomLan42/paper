@@ -173,10 +173,10 @@ def test():
     index = -1
     for m in net.modules():
         if isinstance(m, nn.Conv2d) or isinstance(m, nn.Linear):
-            print m
+            print (m)
             index += 1
-            print index
-    print net
+            print (index)
+    print (net)
     y = net(torch.randn(1,3,32,32))
     print(y.size())
 
